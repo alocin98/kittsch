@@ -1706,6 +1706,13 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/datetimepicker@6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.5.2.tgz#d2c0df9f2c6acce39f7e957743dd811547656098"
+  integrity sha512-9K3zhIH1zmpIGSG3GJTWLIoAx+sR4kJ1wqpGKMwWJ5IYXBsFxMdvGw023t0pz2CQStlnNbbNhnZY/HMYFBCsCg==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -1894,11 +1901,6 @@ aggregate-error@^3.0.0:
   dependencies:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
-
-android@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/android/-/android-0.0.8.tgz#a5b03de920d7437a34ccecee5ee127ef1e4495a9"
-  integrity sha512-cMasrXpHR6APDMSTu5JNMTL37GjYbcC9Uz2cyExSnr0f6XanNhPW3+iavHqRmfNW0QlM4kjZQa2epTjpyZcdjQ==
 
 anser@^1.4.9:
   version "1.4.10"
@@ -3683,11 +3685,6 @@ invariant@^2.2.4:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
-
-ios@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ios/-/ios-0.0.1.tgz#4c6f774d8b0c2e9bb53c3411a6cdf00ac51dd92d"
-  integrity sha512-yhzNDf7dFMzay0eC+geyoDWUV335S17HiOQ3PumOhRn8SIFrjx6RhdVRs4dqCaw9emlhWPzuSk5o10ziUdOrWQ==
 
 ip-regex@^2.1.0:
   version "2.1.0"

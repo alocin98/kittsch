@@ -25,6 +25,7 @@ export const Button = (props: {
                     width: props.wide ? '90%' : 'auto',
                     flexDirection: 'row',
                     alignItems: 'center',
+                    justifyContent: 'center',
                 },
                 props.style,
             ]}>

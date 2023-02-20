@@ -1,21 +1,18 @@
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import React, { useEffect, useState } from 'react';
-import { Keyboard } from 'react-native';
-import { GestureResponderEvent, Pressable, StyleSheet, Text, TextInput, TextInputComponent, TextInputProps } from 'react-native';
+import { Keyboard, View } from 'react-native';
+import { GestureResponderEvent, Pressable, StyleSheet, Platform, TextInputProps } from 'react-native';
 import { IFormComponent, IValidator } from '../forms';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { Button } from './Button';
+import { KText } from './KText';
+
 
 interface InputProps extends TextInputProps, IFormComponent {
-    onPress?: (event: GestureResponderEvent) => void;
-    isSecondary?: boolean;
-    layoutStyle?: any;
-    title?: string;
-    style?: any;
-    debounce?: number;
-    wide?: boolean;
-    value?: string;
-    onValueChange?: (value: string) => void;
+   
 };
 
-export const Input: React.FC<InputProps> = (props: InputProps) => {
+export const DatePicker = (props: any) => {
     const [value, setValue] = useState(props.value ?? '');
     const [errorMessage, setErrorMessage] = useState('');
     const [isValid, setIsValid] = useState(true);
@@ -66,31 +63,17 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
         Keyboard.dismiss();
     };
 
-    return (
-        <Pressable style={{...props.layoutStyle, width: props.wide? '90%' : 'auto'}} onPress={props.onPress}>
-            {props.title && (
-                <Text style={{ color, margin: 3 }}>{props.title}</Text>
-            )}
-            <TextInput
-                {...props}
-                onBlur={onBlur}
-                onChangeText={textChanged}
-                style={{
-                    color: 'black',
-                    borderRadius: 8,
-                    minWidth: 200,
-                    borderWidth: 1,
-                    borderColor: '#E3E5E5',
-                    padding: 10,
-                    ...props.style,
-                }}
-                value={value}
-            />
-            {errorMessage && (
-                <Text style={{ color: 'red' }}>{errorMessage}</Text>
-            )}
-        </Pressable>
-    );
+    const openDatepicker = () => {
+        DateTimePickerAndroid.open({value: new Date()})
+    }
+
+    if(Platform.OS === 'ios') {
+        return <RNDateTimePicker {...props} />
+    } else if (Platform.OS === 'android') {
+        return <View>
+            <Button onPress={() => openDatepicker()}><KText>Pick</KText></Button>
+        </View>
+    }
 };
 
 const styles = StyleSheet.create({
