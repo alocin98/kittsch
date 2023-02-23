@@ -13,12 +13,15 @@ const FontSizeMap = new Map(
 export const KText = (props: {
   children: any;
   size?: 'sm' | 'md' | 'l' | 'xl';
+  primary?: boolean;
   white?: boolean;
+  color?: string;
   style?: any;
 }) => {
    
     const fontSize = FontSizeMap.get(props.size || 'md') || 20;
-    const fontColor = props.white ? '#fff' : '#000';
+
+    let fontColor =  props.white? '#fff' : null || props.primary? global.COLORS.PRIMARY : null || props.color || '#000'
 
   return (
     <Text

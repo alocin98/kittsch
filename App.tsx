@@ -10,7 +10,7 @@ import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
 
 global.COLORS = {
-  PRIMARY: '#000',
+  PRIMARY: '#0ff',
   SECONDARY: '#fff',
 }
 
@@ -44,9 +44,13 @@ export default function App() {
   return (
     <DismissKeyboard>
     <View style={styles.container}>
+    <KText>primary</KText>
     <Divider><Text>Button</Text></Divider>
+      <Button wide onPress={() => alert("Pressed")}>
+        <KText white>Primary</KText>
+      </Button>
       <Button wide isSecondary onPress={() => alert("Pressed")}>
-        <KText white>Hei</KText>
+        <KText>Secondary</KText>
       </Button>
       <Divider><Text>Input</Text></Divider>
       <Input dataLabel='input' transport={recieve} title='title' wide placeholder='placeholder'></Input>
