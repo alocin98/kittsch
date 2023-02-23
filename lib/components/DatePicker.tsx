@@ -1,29 +1,33 @@
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import React, { useEffect, useState } from 'react';
-import { Keyboard, View } from 'react-native';
+import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Keyboard, View, Text } from 'react-native';
 import { GestureResponderEvent, Pressable, StyleSheet, Platform, TextInputProps } from 'react-native';
 import { IFormComponent, IValidator } from '../forms';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Button } from './Button';
 import { KText } from './KText';
 
-
-interface InputProps extends TextInputProps, IFormComponent {
-   
+interface DatePickerProps extends IFormComponent {
+    containerStyle?: any,
+    androidButtonText?: ReactElement,
+    androidButtonWide?: boolean,
+    androidButtonStyle?: any,
+    androidButtonIsSecondary?: boolean,
+    validateOnChange?: boolean,
+    maximumDate?: Date,
+    minimumDate?: Date,
+    value?: Date,
+    onValueChange?: (value: any) => void,
 };
 
-export const DatePicker = (props: any) => {
-    const [value, setValue] = useState(props.value ?? '');
+export const DatePicker = (props: DatePickerProps) => {
+    const [value, setValue] = useState(props.value ?? new Date());
     const [errorMessage, setErrorMessage] = useState('');
     const [isValid, setIsValid] = useState(true);
 
     useEffect(() => {
         notifyChanges();
     }, [value, isValid]);
-
-
-    // Define variables
-    const color = props.isSecondary ? global.COLORS.SECONDARY : global.COLORS.PRIMARY;
 
     const notifyChanges = () => {
         if(props.onValueChange) {
@@ -54,30 +58,32 @@ export const DatePicker = (props: any) => {
         return false;
     };
 
-    const textChanged = (e: string) => {
-        setValue(e);
-    };
-
-    const onBlur = () => {
-        validate();
-        Keyboard.dismiss();
-    };
+    const onValueChange = (e: DateTimePickerEvent, date: Date) => {
+        if(props.validateOnChange) validate()
+        setValue(date);
+    }
 
     const openDatepicker = () => {
-        DateTimePickerAndroid.open({value: new Date()})
+        DateTimePickerAndroid.open({value: new Date(), mode: 'date', onChange: onValueChange, maximumDate: props.maximumDate, minimumDate: props.minimumDate})
     }
 
-    if(Platform.OS === 'ios') {
-        return <RNDateTimePicker {...props} />
-    } else if (Platform.OS === 'android') {
-        return <View>
-            <Button onPress={() => openDatepicker()}><KText>Pick</KText></Button>
-        </View>
-    }
+    const androidOpenButton = <Button isSecondary={props.androidButtonIsSecondary} style={[props.androidButtonStyle]} wide={props.androidButtonWide} onPress={openDatepicker}>{props.androidButtonText}</Button>
+
+    return (
+        <>
+            <View style={[styles.container, props.containerStyle]}>
+                {Platform.OS === 'ios' && <RNDateTimePicker maximumDate={props.maximumDate} minimumDate={props.minimumDate} onChange={onValueChange} value={value} />}
+                {Platform.OS === 'android' && androidOpenButton}
+            </View>
+            {errorMessage && <Text style={{color: 'red'}}>{errorMessage}</Text>}
+        </>
+    )
 };
 
 const styles = StyleSheet.create({
-    input: {
-
+    container: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 })

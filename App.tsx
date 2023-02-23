@@ -6,7 +6,7 @@ import { DismissKeyboard } from './lib/mixins/DismissKeyboard';
 import { Divider } from './lib/components/Divider';
 import SwitchButton from './lib/components/SwitchButtons';
 import { IForm, IValidator, NotEmpty } from './lib/forms';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
 
 global.COLORS = {
@@ -31,14 +31,14 @@ export default function App() {
     form['input'].validate();
   }
 
-  const noSpecialCharactersValidator: IValidator = {
-      validate: (value: string) => !value.match(/[^a-zA-Z0-9]/),
-      errorMessage: 'No special characters allowed'
-  }
-
   const switchValidator: IValidator = {
       validate: (value: string[]) => value.length > 2,
       errorMessage: 'Please select at least one option'
+  }
+
+  const isOver18Validator: IValidator = {
+    validate: (date: Date) => false,
+    errorMessage: 'You must be over 18'
   }
 
   return (
@@ -66,7 +66,7 @@ export default function App() {
         ]}
         ></SwitchButton>
         <Divider><Text>Datepicker</Text></Divider>
-        <DatePicker />
+        <DatePicker validateOnChange validators={[isOver18Validator]} dataLabel='datepicker' transport={recieve} androidButtonIsSecondary androidButtonWide androidButtonText={<KText white>Open datepicker</KText>} />
         <Divider><Text>Form Content</Text></Divider>
         <Text>{JSON.stringify(form)}</Text>
     </View>
