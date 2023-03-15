@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TextProps} from 'react-native';
 
 const FontSizeMap = new Map(
     [
@@ -10,14 +10,14 @@ const FontSizeMap = new Map(
     ]
 )
 
-export const KText = (props: {
-  children: any;
+interface KTextProps extends TextProps {
   size?: 'sm' | 'md' | 'l' | 'xl';
   primary?: boolean;
   white?: boolean;
   color?: string;
-  style?: any;
-}) => {
+};
+
+export const KText = (props: KTextProps) => {
    
     const fontSize = FontSizeMap.get(props.size || 'md') || 20;
 
@@ -25,11 +25,10 @@ export const KText = (props: {
 
   return (
     <Text
-      style={{
+      style={[{
         fontSize: fontSize,
         color: fontColor,
-        ...props.style,
-      }}>
+      }, props.style]}>
       {props.children}
     </Text>
   );

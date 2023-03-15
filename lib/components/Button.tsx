@@ -10,16 +10,13 @@ export const Button = (props: {
     wide?: boolean;
     style?: any;
 }) => {
-    const backgroundColor = props.isSecondary ? global.COLORS.SECONDARY : global.COLORS.PRIMARY;
+    const backgroundColor = props.isSecondary ? '#282828' : global.COLORS.PRIMARY;
 
     return (
         <Pressable
             onPress={props.onPress}
             style={[
                 {
-                    borderColor: global.COLORS.PRIMARY,
-                    borderWidth: 1,
-                    borderStyle: 'solid',
                     backgroundColor: backgroundColor,
                     borderRadius: 8,
                     paddingVertical: 10,
