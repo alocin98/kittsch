@@ -3,7 +3,7 @@ import { Keyboard } from 'react-native';
 import { GestureResponderEvent, Pressable, StyleSheet, Text, TextInput, TextInputComponent, TextInputProps } from 'react-native';
 import { IFormComponent, IValidator } from '../forms';
 
-interface InputProps extends TextInputProps, IFormComponent {
+export interface InputProps extends TextInputProps, IFormComponent {
     onPress?: (event: GestureResponderEvent) => void;
     isSecondary?: boolean;
     layoutStyle?: any;

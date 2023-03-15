@@ -10,7 +10,7 @@ const FontSizeMap = new Map(
     ]
 )
 
-interface KTextProps extends TextProps {
+export interface KTextProps extends TextProps {
   size?: 'sm' | 'md' | 'l' | 'xl';
   primary?: boolean;
   white?: boolean;

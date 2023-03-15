@@ -7,7 +7,7 @@ import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Button } from './Button';
 import { KText } from './KText';
 
-interface DatePickerProps extends IFormComponent {
+export interface DatePickerProps extends IFormComponent {
     containerStyle?: any,
     androidButtonText?: ReactElement,
     androidButtonWide?: boolean,

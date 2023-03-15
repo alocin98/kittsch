@@ -4,13 +4,13 @@ import { IFormComponent } from '../forms';
 
 //Todo: notify changes, define colors and enable styling
 
-interface ISwitchButtonOption {
+export interface ISwitchButtonOption {
     label: string,
     value: string,
     selected: boolean,
 }
 
-interface SwitchButtonProps extends IFormComponent {
+export interface SwitchButtonProps extends IFormComponent {
     options?: ISwitchButtonOption[],
     validateOnChange?: boolean,
     onValueChange?: (selected: string[]) => void,
