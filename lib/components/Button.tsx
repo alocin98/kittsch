@@ -10,7 +10,7 @@ export const Button = (props: {
     wide?: boolean;
     style?: any;
 }) => {
-    const backgroundColor = props.isSecondary ? '#282828' : global.COLORS.PRIMARY;
+    const backgroundColor = props.isSecondary ? '#F3F3F3' : global.COLORS.PRIMARY;
 
     return (
         <Pressable
