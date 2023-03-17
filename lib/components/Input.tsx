@@ -12,6 +12,7 @@ export interface InputProps extends TextInputProps, IFormComponent {
     debounce?: number;
     wide?: boolean;
     value?: string;
+    hideKeyboardOnBlur?: boolean;
     onValueChange?: (value: string) => void;
 };
 
@@ -63,7 +64,9 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
 
     const onBlur = () => {
         validate();
-        Keyboard.dismiss();
+        if(props.hideKeyboardOnBlur) {
+            Keyboard.dismiss();
+        }
     };
 
     return (
