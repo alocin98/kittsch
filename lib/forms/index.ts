@@ -13,8 +13,8 @@ export interface IValidator {
 export interface IForm {
     [key: string]: {
         value: string;
-        valid: boolean;
-        validate: () => void;
+        valid?: boolean;
+        validate?: () => void;
     };
 }
 
