@@ -1,11 +1,10 @@
 import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Keyboard, View, Text } from 'react-native';
-import { GestureResponderEvent, Pressable, StyleSheet, Platform, TextInputProps } from 'react-native';
-import { IFormComponent, IValidator } from '../forms';
+import { View, Text } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import { IFormComponent } from '../forms';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Button } from './Button';
-import { KText } from './KText';
 
 export interface DatePickerProps extends IFormComponent {
     containerStyle?: any,

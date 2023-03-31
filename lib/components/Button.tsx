@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 
-
-export const Button = (props: {
-    children: any;
-    onPress?: () => void;
-    size?: number;
+export interface KButtonProps extends PressableProps {
     isSecondary?: boolean;
     wide?: boolean;
     style?: any;
-}) => {
-    const backgroundColor = props.isSecondary ? '#F3F3F3' : global.COLORS.PRIMARY;
+};
+
+export const Button = (props: KButtonProps ) => {
+    const { isSecondary, wide, style, children, onPress } = props;
+    const backgroundColor = isSecondary ? '#F3F3F3' : global.COLORS.PRIMARY;
 
     return (
         <Pressable
-            onPress={props.onPress}
+            onPress={onPress}
             style={[
                 {
                     backgroundColor: backgroundColor,
                     borderRadius: 8,
                     paddingVertical: 10,
                     paddingHorizontal: 12,
-                    width: props.wide ? '90%' : 'auto',
+                    width: wide ? '100%' : 'auto',
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
                 },
-                props.style,
+                style,
             ]}>
-            {props.children}
+            {children}
         </Pressable>
     );
 }

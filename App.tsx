@@ -10,7 +10,7 @@ import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
 
 global.COLORS = {
-  PRIMARY: '#0ff',
+  PRIMARY: '#1F618D',
   SECONDARY: '#fff',
 }
 
@@ -23,12 +23,10 @@ export default function App() {
     }
   });
 
+  const [error, setError] = useState<string>('');
+
   const recieve = (key: string, value: string, isValid: boolean, validate: () => {}) => {
     setForm({...form, [key]: {value, isValid, validate}});
-  }
-
-  const validateInput = () => {
-    form['input'].validate();
   }
 
   const switchValidator: IValidator = {
@@ -53,8 +51,11 @@ export default function App() {
         <KText>Secondary</KText>
       </Button>
       <Divider><Text>Input</Text></Divider>
-      <Input dataLabel='input' transport={recieve} title='title' wide placeholder='placeholder'></Input>
-      <Button wide onPress={validateInput}><Text>Validate Input</Text></Button>
+      <Input title='title' wide placeholder='placeholder'></Input>
+      <Divider><Text>Input with error</Text></Divider>
+      <Input title='title' wide placeholder='placeholder' errorMessage={error}></Input>
+      <Button wide onPress={() => setError('Error message')}><KText white>Set error</KText></Button>
+      <Button wide onPress={() => setError('')}><KText white>Clear error</KText></Button>
       <Divider><Text>Switch Button</Text></Divider>
       <SwitchButton
       dataLabel='switch'
@@ -80,6 +81,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    gap: 3,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
