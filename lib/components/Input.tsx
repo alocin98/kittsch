@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
     };
 
     return (
-        <Pressable style={{width: wide? '90%' : 'auto', ...layoutStyle}} onPress={props.onPress}>
+        <Pressable style={{width: wide? '100%' : 'auto', ...layoutStyle}} onPress={props.onPress}>
             {title && (
                 <Text style={{ color, margin: 3 }}>{title}</Text>
             )}
@@ -47,7 +47,7 @@ export const Input: React.FC<InputProps> = (props: InputProps) => {
                 }}
                 value={value}
             />
-            <Text style={{ color: 'red', marginTop: 2, ...props.errorMessageStyle }}>{errorMessage}</Text>
+            {errorMessage && <Text style={{ color: 'red', marginTop: 2, ...props.errorMessageStyle }}>{errorMessage}</Text>}
         </Pressable>
     );
 };
