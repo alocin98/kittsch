@@ -9,7 +9,7 @@ export interface CheckboxProps {
     children?: React.ReactNode;
 }
 
-const Checkbox = (props: CheckboxProps) => {
+export const Checkbox = (props: CheckboxProps) => {
     const { checked, onChange, children } = props;
     const [isChecked, setIsChecked] = useState(checked ?? false);
 
