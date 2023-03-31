@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button } from './lib/components/Button';
 import { KText } from './lib/components/KText';
 import { Input } from './lib/components/Input';
@@ -8,6 +8,7 @@ import SwitchButton from './lib/components/SwitchButtons';
 import { IForm, IValidator, NotEmpty } from './lib/forms';
 import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
+import Checkbox from './lib/components/Checkbox';
 
 global.COLORS = {
   PRIMARY: '#1F618D',
@@ -41,7 +42,8 @@ export default function App() {
 
   return (
     <DismissKeyboard>
-    <View style={styles.container}>
+      <View style={{flex: 1}}>
+    <ScrollView contentContainerStyle={styles.container}>
     <KText>primary</KText>
     <Divider><Text>Button</Text></Divider>
       <Button wide onPress={() => alert("Pressed")}>
@@ -56,6 +58,8 @@ export default function App() {
       <Input title='title' wide placeholder='placeholder' errorMessage={error}></Input>
       <Button wide onPress={() => setError('Error message')}><KText white>Set error</KText></Button>
       <Button wide onPress={() => setError('')}><KText white>Clear error</KText></Button>
+      <Divider><Text>Checkbox</Text></Divider>
+      <Checkbox><Text>Some text here</Text></Checkbox>
       <Divider><Text>Switch Button</Text></Divider>
       <SwitchButton
       dataLabel='switch'
@@ -74,6 +78,7 @@ export default function App() {
         <DatePicker validateOnChange validators={[isOver18Validator]} dataLabel='datepicker' transport={recieve} androidButtonIsSecondary androidButtonWide androidButtonText={<KText white>Open datepicker</KText>} />
         <Divider><Text>Form Content</Text></Divider>
         <Text>{JSON.stringify(form)}</Text>
+    </ScrollView>
     </View>
     </DismissKeyboard>
   );
@@ -81,10 +86,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     gap: 3,
+    width: '90%',
+    alignItems: 'center',
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
 });
