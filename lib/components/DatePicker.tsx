@@ -1,12 +1,11 @@
 import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet, Platform } from 'react-native';
-import { IFormComponent } from '../forms';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Button } from './Button';
 
-export interface DatePickerProps extends IFormComponent {
+export interface DatePickerProps {
     containerStyle?: any,
     androidButtonText?: ReactElement,
     androidButtonWide?: boolean,
@@ -22,43 +21,8 @@ export interface DatePickerProps extends IFormComponent {
 export const DatePicker = (props: DatePickerProps) => {
     const [value, setValue] = useState(props.value ?? new Date());
     const [errorMessage, setErrorMessage] = useState('');
-    const [isValid, setIsValid] = useState(true);
-
-    useEffect(() => {
-        notifyChanges();
-    }, [value, isValid]);
-
-    const notifyChanges = () => {
-        if(props.onValueChange) {
-            props.onValueChange(value);
-        }
-        if(props.transport) {
-            props.transport(props.dataLabel ?? '', value, isValid, validate);
-        }
-    };
-
-    const validate = () => {
-        if (!props.validators) {
-            setIsValid(true);
-            setErrorMessage('');
-            return true;
-        }
-
-        const hasErrors = props.validators.some((validator) => !validator.validate(value));
-        if(!hasErrors) {
-            setIsValid(true);
-            setErrorMessage('');
-            return true;
-        }
-        const errorMessage = props.validators.find((validator) => !validator.validate(value))?.errorMessage;
-        setErrorMessage(errorMessage ?? '');
-        setIsValid(false);
-        setErrorMessage(errorMessage);
-        return false;
-    };
 
     const onValueChange = (e: DateTimePickerEvent, date: Date) => {
-        if(props.validateOnChange) validate()
         setValue(date);
     }
 

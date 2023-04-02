@@ -1,24 +1,23 @@
-export interface IFormComponent {
-    validate?: () => boolean;
-    validators?: IValidator[];
-    dataLabel?: string;
-    transport?: (dataLabel: string, value: any, valid: boolean, validate: () => boolean) => void;
+export type Validator = {
+  validate: (value: string) => boolean;
+  errorMessage: string;
+};
+export type Form = {
+  [key: string]: { value: any; error: string; validators: Validator[] };
+};
+export function validate(form: Form, stopWhenOneFieldInvalidate?: boolean): [Form, boolean] {
+  if(!stopWhenOneFieldInvalidate) stopWhenOneFieldInvalidate = true;
+  Object.keys(form).every((key) => {
+    const field = form[key];
+    field.error = field.validators.reduce((error, validator) => {
+      return error || validator.validate(field.value) ? '' : validator.errorMessage;
+    }, '');
+    if (stopWhenOneFieldInvalidate && field.error) {
+      return false;
+    }
+  });
+  const isValid = Object.keys(form).every((key) => {
+    return form[key].error === '';
+  });
+  return [form, isValid];
 }
-
-export interface IValidator {
-    validate: (value: any) => boolean;
-    errorMessage?: string;
-}
-
-export interface IForm {
-    [key: string]: {
-        value: string;
-        valid?: boolean;
-        validate?: () => void;
-    };
-}
-
-export const NotEmpty: IValidator = {
-    validate: (value) => value.length > 0,
-    errorMessage: 'This field is required'
-}   

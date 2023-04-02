@@ -5,7 +5,6 @@ import { Input } from './lib/components/Input';
 import { DismissKeyboard } from './lib/mixins/DismissKeyboard';
 import { Divider } from './lib/components/Divider';
 import SwitchButton from './lib/components/SwitchButtons';
-import { IForm, IValidator, NotEmpty } from './lib/forms';
 import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
 import Checkbox from './lib/components/Checkbox';
@@ -30,20 +29,11 @@ export default function App() {
     setForm({...form, [key]: {value, isValid, validate}});
   }
 
-  const switchValidator: IValidator = {
-      validate: (value: string[]) => value.length > 2,
-      errorMessage: 'Please select at least one option'
-  }
-
-  const isOver18Validator: IValidator = {
-    validate: (date: Date) => false,
-    errorMessage: 'You must be over 18'
-  }
-
   return (
     <DismissKeyboard>
       <View style={{flex: 1}}>
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <View style={styles.container}>
     <KText>primary</KText>
     <Divider><Text>Button</Text></Divider>
       <Button wide onPress={() => alert("Pressed")}>
@@ -62,11 +52,8 @@ export default function App() {
       <Checkbox><Text>Some text here</Text></Checkbox>
       <Divider><Text>Switch Button</Text></Divider>
       <SwitchButton
-      dataLabel='switch'
       wide
       multi
-      validators={[switchValidator]}
-      transport={recieve}
       validateOnChange
       options={[
         {label: "Option 1", value: "o1", selected: true},
@@ -75,9 +62,8 @@ export default function App() {
         ]}
         ></SwitchButton>
         <Divider><Text>Datepicker</Text></Divider>
-        <DatePicker validateOnChange validators={[isOver18Validator]} dataLabel='datepicker' transport={recieve} androidButtonIsSecondary androidButtonWide androidButtonText={<KText white>Open datepicker</KText>} />
-        <Divider><Text>Form Content</Text></Divider>
-        <Text>{JSON.stringify(form)}</Text>
+        <DatePicker validateOnChange androidButtonIsSecondary androidButtonWide androidButtonText={<KText white>Open datepicker</KText>} />
+        </View>
     </ScrollView>
     </View>
     </DismissKeyboard>
@@ -86,12 +72,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     gap: 3,
     width: '90%',
     alignItems: 'center',
-    flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

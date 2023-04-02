@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { TextStyle } from 'react-native';
-import { Keyboard, StyleProp } from 'react-native';
-import { GestureResponderEvent, Pressable, StyleSheet, Text, TextInput, TextInputComponent, TextInputProps } from 'react-native';
-import { IFormComponent, IValidator } from '../forms';
+import React, { useState } from 'react';
+import { StyleProp } from 'react-native';
+import { GestureResponderEvent, Pressable, Text, TextInput, TextInputProps } from 'react-native';
 
 export interface InputProps extends TextInputProps {
     onPress?: (event: GestureResponderEvent) => void;
