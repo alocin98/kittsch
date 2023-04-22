@@ -8,6 +8,7 @@ import SwitchButton from './lib/components/SwitchButtons';
 import { useRef, useState } from 'react';
 import { DatePicker } from './lib/components/DatePicker';
 import Checkbox from './lib/components/Checkbox';
+import Batch from './lib/components/Batch';
 
 global.COLORS = {
   PRIMARY: '#1F618D',
@@ -61,9 +62,12 @@ export default function App() {
         {label: "Option 3", value: "o3", selected: true},
         ]}
         ></SwitchButton>
+                <Divider><Text>Batch</Text></Divider>
+        <Batch><Text>1/3 messages</Text></Batch>
         <Divider><Text>Datepicker</Text></Divider>
         <DatePicker validateOnChange androidButtonIsSecondary androidButtonWide androidButtonText={<KText white>Open datepicker</KText>} />
         </View>
+
     </ScrollView>
     </View>
     </DismissKeyboard>
